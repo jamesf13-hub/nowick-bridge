@@ -5,14 +5,16 @@
 <meta http-equiv="refresh" content="300">
 <title>No Wick Strategy — Live Status</title>
 <style>
-body { background:#0d1117; color:#c9d1d9; font-family:monospace; font-size:14px; padding:2em; max-width:900px; margin:0 auto; }
-pre { white-space:pre-wrap; word-wrap:break-word; line-height:1.6; }
-h1 { color:#58a6ff; }
-.ts { color:#8b949e; font-size:12px; }
+  body { background:#0d1117; color:#c9d1d9; font-family:monospace; padding:20px; }
+  pre  { white-space:pre-wrap; word-break:break-word; font-size:13px; line-height:1.5; }
+  .ts  { color:#58a6ff; font-size:12px; margin-bottom:12px; }
+  h1   { color:#f0f6fc; font-size:16px; }
 </style>
 </head>
 <body>
-<p class="ts">Auto-refreshes every 5 minutes. Last push: 2026-06-13 12:55 AEST</p>
+<h1>No Wick Strategy — Live Bridge</h1>
+<p class="ts">Last updated: 2026-06-13 12:58:03 AEST | Auto-refreshes every 5 min</p>
+<p class="ts">To send instructions → POST https://&lt;cloudflare-tunnel&gt;/task</p>
 <pre>================================================================================
 NO WICK STRATEGY — FULL STATUS REPORT
 Generated: 2026-06-13 (morning session)
@@ -109,7 +111,7 @@ Phase 1 — Pure no-wick signal, broad parameter sweep
   86,400 combos/pair × 10 pairs | min_trades=100 | Result: 51–54% WR baseline
 
 Phase 2 — Add body size + purity filters
-  9,600 combos/pair | min_trades=30 | Result: 65–74% WR but <53 trades — too sparse
+  9,600 combos/pair | min_trades=30 | Result: 65–74% WR but &lt;53 trades — too sparse
 
 Phase 3 — Trade count expansion (Asian session)
   34,560 combos/pair × 10 pairs | min_trades=80
@@ -155,7 +157,7 @@ What IS working (alternative bridge):
      POST /task accepts new instructions
 
 To enable chat injection — choose one:
-  Option A: System Settings → Privacy & Security → Accessibility → add Terminal
+  Option A: System Settings → Privacy &amp; Security → Accessibility → add Terminal
             Then run: python3 ~/Trading/chat_injector.py
   Option B: Install Claude Chrome extension at claude.ai, then chat injection
             works natively via mcp__Claude_in_Chrome__ tools
