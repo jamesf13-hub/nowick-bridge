@@ -118,32 +118,34 @@ CURRENT PHASE: COMPLETE ✅
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-5. COMPUTER-USE BRIDGE STATUS
+5. BRIDGE STATUS — TWO-WAY COMMS ACTIVE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-❌ DID NOT WORK — BLOCKED BY PERMISSIONS
+STATUS OUT (Claude Code → Claude web chat):
+  ✅ GitHub Pages  https://jamesf13-hub.github.io/nowick-bridge/
+     Updates every 5 min via git_bridge.py (PID 42715). STABLE PERMANENT URL.
+     Claude web chat can WebFetch this URL to read live status.
 
-Three methods attempted:
-  1. computer-use MCP (mcp__computer-use__*) — request_access timed out after
-     300s. Browsers are "read" tier — clicks and typing are blocked by design.
-  2. Chrome MCP (mcp__Claude_in_Chrome__*) — Chrome extension not connected.
-     Would work if user installs extension at claude.ai.
-  3. osascript / Apple Events — "osascript is not allowed to send keystrokes"
-     (error 1002). Terminal needs Accessibility permission.
+  ✅ Cloudflare tunnel  https://cleaner-logic-consensus-jpg.trycloudflare.com/bridge
+     Flask GET /bridge returns plain-text LATEST_STATUS.txt (PID 37400)
+     NOTE: URL changes if cloudflared restarts
 
-What IS working (alternative bridge):
-  ✅ GitHub Gist updates every 5 min (running, PID 40457)
-     https://gist.githubusercontent.com/jamesf13-hub/f782161fd68957ea07977916552542db/raw/status.md
-  ✅ Flask bridge server running (PID 37400)
-     GET /bridge returns LATEST_STATUS.txt as plain text
-     GET /status returns JSON status
-     POST /task accepts new instructions
+  ✅ GitHub Gist  (blocked by Claude web chat sandbox — use Pages instead)
 
-To enable chat injection — choose one:
-  Option A: System Settings → Privacy & Security → Accessibility → add Terminal
-            Then run: python3 ~/Trading/chat_injector.py
-  Option B: Install Claude Chrome extension at claude.ai, then chat injection
-            works natively via mcp__Claude_in_Chrome__ tools
+INSTRUCTIONS IN (Claude web chat → Claude Code):
+  ✅ POST https://cleaner-logic-consensus-jpg.trycloudflare.com/task
+     Body: {"task": "your instruction here"}
+     Saves to ~/Trading/Tasks/ — Claude Code picks up next cycle
+
+ALL RUNNING BRIDGE PROCESSES:
+  PID 42715  git_bridge.py      GitHub Pages push every 5 min
+  PID 41843  paste_bridge.py    paste.rs snapshot every 5 min
+  PID 41725  cloudflared        Tunnel to Flask (port 5001)
+  PID 37400  bridge_server.py   Flask API
+  PID 41594  gist_updater.py    GitHub Gist every 5 min
+
+Computer-use injection: BLOCKED (Safari=read-tier, osascript needs Accessibility)
+To enable: System Settings → Privacy & Security → Accessibility → add Terminal
 
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -161,5 +163,6 @@ KEY FILES
 ~/Trading/Results/NoWick_USD_CHF.pine     — TradingView Pine Script
 ~/Trading/bridge_server.py                — Flask API (running, port 5001)
 ~/Trading/gist_updater.py                 — Live Gist sync (running, every 5min)
-~/Trading/chat_injector.py                — Ready, needs Accessibility permission
+~/Trading/git_bridge.py                   — GitHub Pages push (running, every 5min)
+~/Trading/paste_bridge.py                 — paste.rs snapshot (running, every 5min)
 ================================================================================
