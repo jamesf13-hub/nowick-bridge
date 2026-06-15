@@ -13,10 +13,10 @@
 </head>
 <body>
 <h1>No Wick Strategy — Live Bridge</h1>
-<p class="ts">Last updated: 2026-06-15 20:55:56 AEST | Auto-refreshes every 5 min</p>
+<p class="ts">Last updated: 2026-06-15 21:00:58 AEST | Auto-refreshes every 5 min</p>
 <p class="ts">To send instructions → POST https://&lt;cloudflare-tunnel&gt;/task</p>
 <pre>NO WICK STRATEGY — STATUS UPDATE
-Updated: 2026-06-15 14:55 AEST
+Updated: 2026-06-15 20:45 AEST
 ============================================================
 
 MISSION: 65%+ WR across 10+ FX pairs, commercial viability
@@ -65,10 +65,28 @@ COMBINED PORTFOLIO (23 pairs):
   All pairs: 65%–79% WR | PF 1.86–3.77
 
 ============================================================
+LIVE INFRASTRUCTURE
+============================================================
+Python live scanner: /Users/jamesfinlay/Trading/live_scanner.py
+  - Checks all 23 pairs via OANDA API (practice) every 15m
+  - Usage: python3 live_scanner.py --continuous | --check | --test
+  - Email: configure EMAIL_FROM/EMAIL_PASS in script to enable
+  - Log: /Users/jamesfinlay/Trading/Results/live_signals.log
+
+TV Pine scripts: /Users/jamesfinlay/Trading/Results/NoWick_*_v2.pine
+  - All 23 scripts updated with alert() function calls
+  - TV alert setup: Add strategy to chart → Create Alert → 
+    Condition: "No Wick [PAIR] [v2]" → "alert() function calls" → Once Per Bar Close
+  - GBP/JPY v2 active on OANDA:GBPJPY 15m (TV cloud: "No Wick Strategy - NQ/MNQ [Strategy]")
+  - TV 2026 YTD: 67T 61.2% WR (vs Python 65.1% — normal variance at N=67)
+
+============================================================
 PINE SCRIPTS
 ============================================================
-All 21 pairs have Pine v2 scripts in /Users/jamesfinlay/Trading/Results/NoWick_*_v2.pine
-Compile validation: EUR/NZD on OANDA:EURNZD — only severity-4 informational, ZERO errors
+All 23 pairs have Pine v2 scripts in /Users/jamesfinlay/Trading/Results/NoWick_*_v2.pine
+All updated 2026-06-15 with: alert() on signal + year-by-year table
+GBP/JPY: saved to TV cloud as "No Wick Strategy - NQ/MNQ [Strategy]" (active on chart)
+Other 22 pairs: Pine files on disk, load via Pine Editor → paste → Save As [PAIR]
 
 ============================================================
 PHASE HISTORY
@@ -84,12 +102,13 @@ Phase 5c: Unified session search new 13 — +34.4/month → 68.1/month total
 ============================================================
 NEXT STEPS
 ============================================================
-1. ✅ Save all 15 new Pine scripts to TradingView cloud (done 2026-06-15)
-2. ✅ Position sizing framework: 1% risk/trade, max 5 concurrent, 6.5% max DD (95th pct)
-3. Spot-check 2-3 new pairs TV vs Python signal alignment
-4. Re-test EUR/GBP and AUD/NZD marginal pairs with wider param grid
-5. Define live alert setup (TradingView webhook/email alerts per pair)
-6. Build trade journal / live tracking sheet
+1. ✅ Save all Pine scripts to disk with alert() (done 2026-06-15)
+2. ✅ Position sizing: 1% risk/trade, max 5 concurrent, 6.5% max DD (95th pct)
+3. ✅ Live scanner: Python/OANDA polls 23 pairs every 15m (done 2026-06-15)
+4. 🔄 Re-test EUR/GBP + AUD/NZD with wider param grid (in progress)
+5. □  Set up TV alerts for all 23 pairs on respective charts
+6. □  Build trade journal / live tracking sheet
+7. □  Enable email alerts in live_scanner.py
 </pre>
 </body>
 </html>
