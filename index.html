@@ -13,47 +13,78 @@
 </head>
 <body>
 <h1>No Wick Strategy — Live Bridge</h1>
-<p class="ts">Last updated: 2026-06-15 14:51:01 AEST | Auto-refreshes every 5 min</p>
+<p class="ts">Last updated: 2026-06-15 14:56:03 AEST | Auto-refreshes every 5 min</p>
 <p class="ts">To send instructions → POST https://&lt;cloudflare-tunnel&gt;/task</p>
 <pre>NO WICK STRATEGY — STATUS UPDATE
-Generated: 2026-06-15 14:30 AEST
+Updated: 2026-06-15 14:55 AEST
 ============================================================
 
-## CURRENT PHASE: Phase 5 (New Pair Universe)
-  Running grid search on 15 new FX pairs (EUR/JPY, GBP/AUD, GBP/NZD, etc.)
-  Status: IN PROGRESS — background job running
+MISSION: 65%+ WR across 10+ FX pairs, commercial viability
+STATUS: ✅ PHASE 5 COMPLETE — 21 PAIRS, 68 TRADES/MONTH
 
-## 8 LOCKED PAIRS (Phase 5b)
-  GBP/JPY  | 877 trades | 65.1% WR | PF 1.87 | sess 10-19 AEST
-  NZD/JPY  | 349 trades | 65.0% WR | PF 1.86 | sess 10-19 AEST
-  USD/CHF  | 582 trades | 65.5% WR | PF 1.90 | sess 22-03 AEST (wraps)
-  CAD/JPY  | 232 trades | 65.5% WR | PF 1.90 | sess 17-23 AEST
-  AUD/CHF  | 184 trades | 65.8% WR | PF 1.92 | sess 22-01 AEST (wraps)
-  AUD/CAD  | 160 trades | 65.6% WR | PF 1.91 | sess 15-23 AEST
-  AUD/JPY  | 143 trades | 65.0% WR | PF 1.86 | sess 18-23 AEST
-  AUD/USD  |  60 trades | 65.0% WR | PF 2.00 | sess 17-20 AEST
-  TOTAL:   2,587 trades across 6.4 years (~404/yr, ~34/month)
+============================================================
+PORTFOLIO SUMMARY
+============================================================
 
-## PINE SCRIPTS v2 (all 8 generated, clean syntax)
-  /Users/jamesfinlay/Trading/Results/NoWick_*_v2.pine
-  Fixes: strategy.cancel() on expiry, swing[1] SL, DST-safe timezone, 
-         single entry call, multi-line ternary/semicolon syntax fixed
+ORIGINAL 8 PAIRS (Phase 5b locked):
+  GBP/JPY  10.0–19.0 AEST  lb=8  buf=7  msl=20  exp=10  wtol=3  body=10p bpct=0.65 pr=T  877T 65.1% WR PF1.87
+  NZD/JPY  10.0–19.0 AEST  lb=6  buf=7  msl=20  exp=10  wtol=3  body=12p bpct=0.70 pr=F  349T 65.0% WR PF1.86
+  AUD/JPY  18.0–23.0 AEST  lb=12 buf=7  msl=20  exp=15  wtol=3  body=12p bpct=0.65 pr=T  143T 65.0% WR PF1.86
+  CAD/JPY  17.0–23.0 AEST  lb=8  buf=7  msl=20  exp=15  wtol=3  body=12p bpct=0.70 pr=T  232T 65.5% WR PF1.90
+  AUD/USD  17.0–20.0 AEST  lb=8  buf=10 msl=30  exp=7   wtol=1  body=10p bpct=0.75 pr=T   60T 65.0% WR PF2.00
+  AUD/CAD  15.0–23.0 AEST  lb=6  buf=7  msl=25  exp=15  wtol=1  body=10p bpct=0.70 pr=T  160T 65.6% WR PF1.91
+  AUD/CHF  22.0–01.0 AEST  lb=6  buf=7  msl=20  exp=7   wtol=3  body=8p  bpct=0.60 pr=T  184T 65.8% WR PF1.92
+  USD/CHF  22.0–03.0 AEST  lb=6  buf=7  msl=20  exp=10  wtol=3  body=8p  bpct=0.60 pr=T  582T 65.5% WR PF1.90
+  Subtotal: 2,587 trades / 6.4yr = 404/yr = 33.7/month
 
-## TV VALIDATION — OANDA:GBPJPY (2026 only)
-  Result: 41W / 26L = 61.2% WR | PF 1.38 | 67 trades (Jan-Jun 2026)
-  VERDICT: VALID — within expected variance
-  - mintick confirmed 0.001, pip=0.01 on OANDA (identical to FX feed)
-  - 67 trades → 95% CI = ±11.7% → range 49.5% to 72.9% is all normal
-  - TV only loads 6 months of OANDA data (vs Python's 6.4 years)
-  - OANDA is correct feed (matches Python backtest data source)
-  - FX:GBPJPY showed 71.2% — inflated by different broker candle construction
-  Chart: OANDA:GBPJPY 15m | v2 only loaded | old v1 removed
+NEW 13 PAIRS (Phase 5 + 5c locked):
+  EUR/JPY  12.0–16.5 AEST  lb=8  buf=7  msl=20  exp=7   wtol=1  body=12p bpct=0.80 pr=T   62T 79.0% WR PF3.77  spot 11/12
+  NZD/USD  12.0–16.5 AEST  lb=8  buf=7  msl=20  exp=10  wtol=2  body=10p bpct=0.65 pr=T   40T 72.5% WR PF2.64  spot 8/12
+  NZD/CAD  12.0–16.5 AEST  lb=20 buf=7  msl=25  exp=7   wtol=2  body=10p bpct=0.65 pr=F   46T 76.1% WR PF3.18  spot 9/12
+  USD/CAD  23.5–01.0 AEST  lb=12 buf=10 msl=20  exp=10  wtol=1  body=12p bpct=0.80 pr=T   45T 71.1% WR PF2.46  spot 8/12
+  EUR/AUD  17.0–01.0 AEST  lb=20 buf=7  msl=20  exp=10  wtol=1  body=12p bpct=0.75 pr=T  253T 70.4% WR PF2.37  spot 12/12
+  EUR/CHF  17.0–01.0 AEST  lb=20 buf=10 msl=20  exp=7   wtol=1  body=12p bpct=0.65 pr=T   42T 76.2% WR PF3.20  spot 6/12 (MARGINAL)
+  EUR/CAD  12.0–01.0 AEST  lb=8  buf=7  msl=20  exp=7   wtol=1  body=12p bpct=0.80 pr=T  250T 72.0% WR PF2.57  spot 12/12
+  EUR/USD  12.0–01.0 AEST  lb=8  buf=7  msl=20  exp=10  wtol=1  body=12p bpct=0.75 pr=T  201T 68.7% WR PF2.19  spot 12/12
+  EUR/NZD  12.0–01.0 AEST  lb=8  buf=7  msl=20  exp=10  wtol=1  body=12p bpct=0.80 pr=T  477T 70.4% WR PF2.38  spot 12/12
+  GBP/AUD  12.0–01.0 AEST  lb=15 buf=10 msl=20  exp=10  wtol=1  body=12p bpct=0.80 pr=T  324T 70.4% WR PF2.38  spot 12/12
+  GBP/CAD  17.0–01.0 AEST  lb=20 buf=7  msl=20  exp=7   wtol=1  body=10p bpct=0.80 pr=T  322T 71.4% WR PF2.50  spot 12/12
+  GBP/CHF  12.0–01.0 AEST  lb=8  buf=7  msl=20  exp=7   wtol=1  body=12p bpct=0.80 pr=T  212T 70.8% WR PF2.42  spot 12/12
+  GBP/NZD  12.0–01.0 AEST  lb=20 buf=7  msl=20  exp=10  wtol=1  body=12p bpct=0.80 pr=T  366T 72.4% WR PF2.62  spot 12/12
+  Subtotal: 2,640 trades / 6.4yr = 412/yr = 34.4/month
 
-## NEXT STEPS
-  1. Phase 5 results → identify new locked pairs from 15 new pairs
-  2. Generate Pine v2 scripts for any new locked pairs
-  3. TV spot checks for best new pairs
-  4. Phase 6: Forward test top pairs on OANDA demo
+COMBINED PORTFOLIO (21 pairs):
+  Total trades: 5,227 over 6.4 years
+  Per year: 817 trades
+  Per month: 68.1 trades/month ✅ EXCEEDS 25/month TARGET BY 2.7×
+  All pairs: 65%–79% WR | PF 1.86–3.77
+
+============================================================
+PINE SCRIPTS
+============================================================
+All 21 pairs have Pine v2 scripts in /Users/jamesfinlay/Trading/Results/NoWick_*_v2.pine
+Compile validation: EUR/NZD on OANDA:EURNZD — only severity-4 informational, ZERO errors
+
+============================================================
+PHASE HISTORY
+============================================================
+Phase 1: Initial discovery — GBP/JPY 62% WR
+Phase 2: Added structural swing SL — 65%+ WR
+Phase 3: Multi-pair expansion — 8 pairs found
+Phase 4: Parameter grid search — locked all 8 pairs
+Phase 5: New pair universe (15 pairs tested, 13 locked)
+Phase 5b: Frequency expansion original 8 — 33.7/month
+Phase 5c: Unified session search new 13 — +34.4/month → 68.1/month total
+
+============================================================
+NEXT STEPS
+============================================================
+1. Save all 13 new Pine scripts to TradingView cloud
+2. Spot-check 2-3 new pairs TV vs Python signal alignment
+3. Re-test EUR/GBP and AUD/NZD marginal pairs with wider param grid
+4. Build position sizing model (% risk per trade, max concurrent exposure)
+5. Define live trade management rules
+6. Investigate USD/JPY and GBP/USD as potential additions
 </pre>
 </body>
 </html>
