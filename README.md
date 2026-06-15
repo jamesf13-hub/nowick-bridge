@@ -1,141 +1,39 @@
-================================================================================
-NO WICK STRATEGY — FULL STATUS REPORT
-Generated: 2026-06-14 (morning)
-================================================================================
+NO WICK STRATEGY — STATUS UPDATE
+Generated: 2026-06-15 14:30 AEST
+============================================================
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-1. PHASE 5b RESULTS — FREQUENCY EXPANSION (COMPLETE ✅)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+## CURRENT PHASE: Phase 5 (New Pair Universe)
+  Running grid search on 15 new FX pairs (EUR/JPY, GBP/AUD, GBP/NZD, etc.)
+  Status: IN PROGRESS — background job running
 
-Total trades expanded from 663 → 2,527 across 8 pairs (+281%)
-Portfolio frequency: 9 → 33 trades/month
+## 8 LOCKED PAIRS (Phase 5b)
+  GBP/JPY  | 877 trades | 65.1% WR | PF 1.87 | sess 10-19 AEST
+  NZD/JPY  | 349 trades | 65.0% WR | PF 1.86 | sess 10-19 AEST
+  USD/CHF  | 582 trades | 65.5% WR | PF 1.90 | sess 22-03 AEST (wraps)
+  CAD/JPY  | 232 trades | 65.5% WR | PF 1.90 | sess 17-23 AEST
+  AUD/CHF  | 184 trades | 65.8% WR | PF 1.92 | sess 22-01 AEST (wraps)
+  AUD/CAD  | 160 trades | 65.6% WR | PF 1.91 | sess 15-23 AEST
+  AUD/JPY  | 143 trades | 65.0% WR | PF 1.86 | sess 18-23 AEST
+  AUD/USD  |  60 trades | 65.0% WR | PF 2.00 | sess 17-20 AEST
+  TOTAL:   2,587 trades across 6.4 years (~404/yr, ~34/month)
 
-┌──────────────────────────────────────────────────────────────────────────────┐
-│ PAIR     SESSION (AEST)   WR      PF     TRADES  CHANGE   NOTE              │
-├──────────────────────────────────────────────────────────────────────────────┤
-│ GBP/JPY  10:00–19:00     65.1%  1.87     877    +357%    ✓ TV VALIDATED    │
-│ NZD/JPY  10:00–19:00     65.0%  1.86     349    +275%                       │
-│ AUD/JPY  18:00–23:00     65.0%  1.86     143    +123%                       │
-│ CAD/JPY  17:00–23:00     65.5%  1.90     232    +246%                       │
-│ AUD/USD  17:00–20:00     65.0%  2.00      60       --    no improvement     │
-│ AUD/CAD  15:00–23:00     65.6%  1.91     160    +214%                       │
-│ AUD/CHF  22:00–01:00     65.8%  1.92     184    +142%    wraps midnight     │
-│ USD/CHF  22:00–03:00     65.5%  1.90     582    +870%    wraps midnight     │
-├──────────────────────────────────────────────────────────────────────────────┤
-│ TOTAL                                  2,527    +281%    33/month            │
-└──────────────────────────────────────────────────────────────────────────────┘
+## PINE SCRIPTS v2 (all 8 generated, clean syntax)
+  /Users/jamesfinlay/Trading/Results/NoWick_*_v2.pine
+  Fixes: strategy.cancel() on expiry, swing[1] SL, DST-safe timezone, 
+         single entry call, multi-line ternary/semicolon syntax fixed
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-2. TRADINGVIEW VALIDATION — GBP/JPY v2 (COMPLETE ✅)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+## TV VALIDATION — OANDA:GBPJPY (2026 only)
+  Result: 41W / 26L = 61.2% WR | PF 1.38 | 67 trades (Jan-Jun 2026)
+  VERDICT: VALID — within expected variance
+  - mintick confirmed 0.001, pip=0.01 on OANDA (identical to FX feed)
+  - 67 trades → 95% CI = ±11.7% → range 49.5% to 72.9% is all normal
+  - TV only loads 6 months of OANDA data (vs Python's 6.4 years)
+  - OANDA is correct feed (matches Python backtest data source)
+  - FX:GBPJPY showed 71.2% — inflated by different broker candle construction
+  Chart: OANDA:GBPJPY 15m | v2 only loaded | old v1 removed
 
-CRITICAL BUG FIXED in Pine Script — 3 bugs found and corrected:
-
-  BUG 1: Missing strategy.cancel() on order expiry
-    → TradingView's pending limit order stayed alive past the expiry window
-    → Generated phantom trades that always lost (caused the 0% WR result)
-    FIX: strategy.cancel("L") and strategy.cancel("S") on expiry
-
-  BUG 2: Swing lookback included current (signal) bar
-    → ta.lowest(low, lookback) included signal bar
-    → Should be ta.lowest(low[1], lookback) to match Python np.min(l[i-lb:i])
-    FIX: Changed to low[1]/high[1]
-
-  BUG 3: DST timezone handling
-    → Manual UTC offset calculation was chart-timezone-dependent
-    FIX: hour(time, "Australia/Sydney") — handles DST automatically
-
-TRADINGVIEW RESULT (Jan 2 – Jun 13, 2026):
-  ✓ Trades:  59
-  ✓ WR:      71.19%  (42W / 17L)
-  ✓ PF:      2.345
-  ✓ Max DD:  0.01% of capital
-  ✓ Avg bars to fill: 3
-
-vs Python backtest (same expanded params, full 6.4 years):
-  Trades: 877  |  WR: 65.1%  |  PF: 1.87
-  TV result is BETTER — fixed script produces cleaner SL levels
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-3. PINE SCRIPTS v2 — PRODUCTION READY (8 pairs)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-All scripts include: 3 bug fixes + year-by-year performance table
-Location: ~/Trading/Results/NoWick_*_v2.pine
-
-  NoWick_GBP_JPY_v2.pine  — 877 trades | 65.1% WR | sess 10-19 AEST
-  NoWick_NZD_JPY_v2.pine  — 349 trades | 65.0% WR | sess 10-19 AEST
-  NoWick_AUD_JPY_v2.pine  — 143 trades | 65.0% WR | sess 18-23 AEST
-  NoWick_CAD_JPY_v2.pine  — 232 trades | 65.5% WR | sess 17-23 AEST
-  NoWick_AUD_USD_v2.pine  —  60 trades | 65.0% WR | sess 17-20 AEST
-  NoWick_AUD_CAD_v2.pine  — 160 trades | 65.6% WR | sess 15-23 AEST
-  NoWick_AUD_CHF_v2.pine  — 184 trades | 65.8% WR | sess 22-01 AEST
-  NoWick_USD_CHF_v2.pine  — 582 trades | 65.5% WR | sess 22-03 AEST
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-4. FULL PARAMETER SPECS (v2 expanded params)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-GBP/JPY  (pip=0.01)
-  sess=10.0–19.0 AEST | lb=8  | buf=7p | maxSL=20p | exp=10c
-  wtol=3p | body=10p | bpct=0.65 | prior_rev=YES
-
-NZD/JPY  (pip=0.01)
-  sess=10.0–19.0 AEST | lb=6  | buf=7p | maxSL=20p | exp=10c
-  wtol=3p | body=12p | bpct=0.70 | prior_rev=NO
-
-AUD/JPY  (pip=0.01)
-  sess=18.0–23.0 AEST | lb=12 | buf=7p | maxSL=20p | exp=15c
-  wtol=3p | body=12p | bpct=0.65 | prior_rev=YES
-
-CAD/JPY  (pip=0.01)
-  sess=17.0–23.0 AEST | lb=8  | buf=7p | maxSL=20p | exp=15c
-  wtol=3p | body=12p | bpct=0.70 | prior_rev=YES
-
-AUD/USD  (pip=0.0001) — original params (no improvement found)
-  sess=17.0–20.0 AEST | lb=8  | buf=10p | maxSL=30p | exp=7c
-  wtol=1p | body=10p | bpct=0.75 | prior_rev=YES
-
-AUD/CAD  (pip=0.0001)
-  sess=15.0–23.0 AEST | lb=6  | buf=7p | maxSL=25p | exp=15c
-  wtol=1p | body=10p | bpct=0.70 | prior_rev=YES
-
-AUD/CHF  (pip=0.0001) — wraps midnight
-  sess=22.0–01.0 AEST | lb=6  | buf=7p | maxSL=20p | exp=7c
-  wtol=3p | body=8p  | bpct=0.60 | prior_rev=YES
-
-USD/CHF  (pip=0.0001) — wraps midnight
-  sess=22.0–03.0 AEST | lb=6  | buf=7p | maxSL=20p | exp=10c
-  wtol=3p | body=8p  | bpct=0.60 | prior_rev=YES
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-5. ROADMAP
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Phase 1–4b — Parameter research (all 10 pairs)              ✅ COMPLETE
-Phase 5b   — Frequency expansion                             ✅ COMPLETE
-Phase 5c   — Pine Script bug fixes + TV validation           ✅ COMPLETE
-Phase 6    — Load remaining 7 pairs into TradingView         ⏳ NEXT
-  Load NoWick_*_v2.pine scripts for NZD/JPY, AUD/JPY, CAD/JPY,
-  AUD/USD, AUD/CAD, AUD/CHF, USD/CHF into TradingView
-Phase 7    — Forward testing (live/demo account)             ⏳ QUEUED
-  Target: 20+ trades per pair live
-  Accept: live WR ≥ 60% (accounting for spread/slippage)
-Phase 8    — New pair expansion (15 pairs)                   ⏳ QUEUED
-  EUR/JPY, GBP/AUD, GBP/NZD, EUR/AUD, NZD/USD, EUR/GBP,
-  GBP/CHF, EUR/CHF, NZD/CAD, EUR/CAD, AUD/NZD, GBP/CAD,
-  EUR/USD, EUR/NZD, USD/CAD
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-6. BRIDGE URLS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-READ STATUS: https://jamesf13-hub.github.io/nowick-bridge/
-SEND TASK:   POST https://cleaner-logic-consensus-jpg.trycloudflare.com/task
-
-KEY FILES:
-  ~/Trading/Results/NoWick_*_v2.pine    — 8 production Pine Scripts (v2 fixed)
-  ~/Trading/Results/PHASE5B_FREQUENCY.txt — phase 5b full results
-  ~/Trading/bridge_server.py            — Flask API (port 5001)
-  ~/Trading/git_bridge.py              — GitHub Pages auto-push
-================================================================================
+## NEXT STEPS
+  1. Phase 5 results → identify new locked pairs from 15 new pairs
+  2. Generate Pine v2 scripts for any new locked pairs
+  3. TV spot checks for best new pairs
+  4. Phase 6: Forward test top pairs on OANDA demo
